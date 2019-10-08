@@ -1,19 +1,40 @@
 pipeline {
-    agent none
+    agent any
+	 options {
+	    disableConcurrentBuilds()
+	  }
     stages {
-        stage('Ubuntu 16.04') {
-    	    agent { docker { image 'ubuntu:16.04' } }
-            steps {
-                sh 'cat /etc/*release*'
-            }
+        stage('Virtualenv configuration') {
+         steps {
+            sh '''#!/bin/bash
+                git clean -d -x -f
+                pwd
+                mkdir tmp
+                rm -rf venv
+
+                virtualenv --python=/usr/bin/python3.6 venv
+                source venv/bin/activate
+                python --version
+
+                #pip install -r ./requirements.txt
+                pip install pytest
+            '''
+      }
         }
-       stage('Ubuntu 18.04') {
-    	    agent { docker { image 'ubuntu:18.04' } }
-            steps {
-                sh 'cat /etc/*release*'
-            }
+       stage('Running tests buntu 18.04') {
+	    stage('Running tests') {
+	      steps {
+		  sh '''#!/bin/bash
+			source venv/bin/activate
+			python --version
+			export PYTHONPATH=\$PYTHONPATH:\$PWD
+			cd src
+			py.test --junitxml tests.xml --cov-report=xml
+		    '''
+	      }
+	    }
         }
-        stage('Second stage'){
+        stage('Last stage'){
 	    agent any
             steps {
 		sh 'sleep(10)'
