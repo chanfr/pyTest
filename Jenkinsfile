@@ -21,9 +21,8 @@ pipeline {
             '''
       }
         }
-       stage('Running tests buntu 18.04') {
-	    stage('Running tests') {
-	      steps {
+	stage('Running tests') {
+		steps {
 		  sh '''#!/bin/bash
 			source venv/bin/activate
 			python --version
@@ -31,9 +30,8 @@ pipeline {
 			cd src
 			py.test --junitxml tests.xml --cov-report=xml
 		    '''
-	      }
-	    }
-        }
+		}
+	}
         stage('Last stage'){
 	    agent any
             steps {
