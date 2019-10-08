@@ -12,7 +12,7 @@ pipeline {
                 mkdir tmp
                 rm -rf venv
 
-                virtualenv --python=/usr/bin/python3.6 venv
+                virtualenv --python=/usr/bin/python3.5 venv
                 source venv/bin/activate
                 python --version
 
