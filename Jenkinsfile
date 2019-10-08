@@ -28,7 +28,7 @@ pipeline {
 			python --version
 			export PYTHONPATH=\$PYTHONPATH:\$PWD
 			cd src
-			py.test py.main --junitxml tests.xml
+			py.test main.py --junitxml tests.xml
 		    '''
 		}
 	}
