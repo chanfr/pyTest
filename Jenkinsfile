@@ -7,7 +7,9 @@ pipeline {
             }
         }
         stage('Second stage'){
+            steps {
 		sh 'sleep(10)'
+	    }
         }
     }
 }
