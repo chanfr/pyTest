@@ -28,7 +28,7 @@ pipeline {
 			python --version
 			export PYTHONPATH=\$PYTHONPATH:\$PWD
 			cd src
-			py.test --junitxml tests.xml --cov-report=xml
+			py.test --junitxml tests.xml
 		    '''
 		}
 	}
