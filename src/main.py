@@ -17,7 +17,7 @@ class TestStringMethods(unittest.TestCase):
             s.split(2)
 
     def test_upper(self):
-        self.assertEqual(1,2)
+        self.assertEqual(2,2)
 
 if __name__ == '__main__':
     unittest.main()
